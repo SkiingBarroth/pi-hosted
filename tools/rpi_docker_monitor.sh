@@ -18,27 +18,27 @@ function check_internet() {
 check_internet
 
 echo "Creating directories..."
-sudo mkdir -p /portainer/Files/AppData/Config/prometheus/config || error "Failed to create config directory!"
-sudo mkdir -p /portainer/Files/AppData/Config/prometheus/data || error "Failed to create data directory for Prometheus!"
-sudo mkdir -p /portainer/Files/AppData/Config/grafana/data || error "Failed to create data directory for Grafana!"
+sudo mkdir -p /portainer/files/appdata/config/prometheus/config || error "Failed to create config directory!"
+sudo mkdir -p /portainer/files/appdata/config/prometheus/data || error "Failed to create data directory for Prometheus!"
+sudo mkdir -p /portainer/files/appdata/config/grafana/data || error "Failed to create data directory for Grafana!"
 echo "Downloading Prometheus config files if they don't exist"
-if [ -d /portainer/Files/AppData/Config/prometheus/config/prometheus.yml ];
+if [ -d /portainer/files/appdata/config/prometheus/config/prometheus.yml ];
 then
-    echo "/portainer/Files/AppData/Config/prometheus/config/prometheus.yml is a directory removing"
-    rm -rf '/portainer/Files/AppData/Config/prometheus/config/prometheus.yml/'
+    echo "/portainer/files/appdata/config/prometheus/config/prometheus.yml is a directory removing"
+    rm -rf '/portainer/files/appdata/config/prometheus/config/prometheus.yml/'
 fi
 
-if [ ! -f /portainer/Files/AppData/Config/prometheus/config/prometheus.yml ]; 
+if [ ! -f /portainer/files/appdata/config/prometheus/config/prometheus.yml ]; 
 then
-	sudo wget -O /portainer/Files/AppData/Config/prometheus/config/prometheus.yml https://raw.githubusercontent.com/oijkn/Docker-Raspberry-PI-Monitoring/main/prometheus/prometheus.yml || error "Failed to download prometheus.yml file!"
+	sudo wget -O /portainer/files/appdata/config/prometheus/config/prometheus.yml https://raw.githubusercontent.com/oijkn/Docker-Raspberry-PI-Monitoring/main/prometheus/prometheus.yml || error "Failed to download prometheus.yml file!"
 fi
 
-if [ -d /portainer/Files/AppData/Config/grafana/grafana.ini ];
+if [ -d /portainer/files/appdata/config/grafana/grafana.ini ];
 then
-    echo "/portainer/Files/AppData/Config/grafana/grafana.ini is a directory removing"
-    rm -rf '/portainer/Files/AppData/Config/grafana/grafana.ini'
+    echo "/portainer/files/appdata/config/grafana/grafana.ini is a directory removing"
+    rm -rf '/portainer/files/appdata/config/grafana/grafana.ini'
 fi
-sudo touch /portainer/Files/AppData/Config/grafana/grafana.ini || error "Failed to touch grafana.ini file!"
+sudo touch /portainer/files/appdata/config/grafana/grafana.ini || error "Failed to touch grafana.ini file!"
 echo "Setting permissions..."
-sudo chown -R 472:472 /portainer/Files/AppData/Config/grafana/data || error "Failed to set permissions for Grafana data!"
+sudo chown -R 472:472 /portainer/files/appdata/config/grafana/data || error "Failed to set permissions for Grafana data!"
 echo "Done You are ready to goto next step in the install document"
